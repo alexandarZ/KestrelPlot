@@ -14,7 +14,7 @@ A simple Python script for plotting Kestrel Instruments 5500 weather meter data 
 **Step 1: Prepare CSV file for plotting**
 
 1) Remove the first 3 lines that contain the Device Name, Device Mode, and Serial Number.
-2) Line that contains the following data:
+2) Remove the line that contains the following data:
 ```
 yyyy-MM-dd hh:mm:ss a,°C,°C,%,mb,m,mb,km/h,°C,°C,m,km/h,km/h,Deg,Deg,°C,Data Type,Record name,Start time,Duration (H:M:S),Location description,Location address,Location coordinates,Notes
 ```
