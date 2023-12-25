@@ -2,6 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 from windrose import WindroseAxes
+import sys
 
 class WeatherDataVisualizer:
     def __init__(self, data_file):
@@ -101,17 +102,28 @@ class WeatherDataVisualizer:
         ax2.set_ylabel('Other Parameters')
         ax2.legend()
 
-# Create figures with subplots
-fig1, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 18))
-fig1.suptitle('Weather Data')
+def main():
+    # Check if the correct number of command-line arguments is provided
+    if len(sys.argv) != 2:
+        print("Usage: python3 app.py <file.csv>")
+        sys.exit(1)
 
-fig3, ax3 = plt.subplots(figsize=(10, 6))
+    # Get the file path from the command-line arguments
+    file_path = sys.argv[1]
 
-weather_visualizer = WeatherDataVisualizer('./Data.csv')
-weather_visualizer.createTemperaturePlot(ax1)
-weather_visualizer.createBarometricPressurePlot(ax2)
-weather_visualizer.createWindPlot('Compass True Direction', 'Wind Speed')
-weather_visualizer.createFogProbabilityPlot(ax3)
+    # Create figures with subplots
+    fig1, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 18))
+    fig1.suptitle('Weather Data')
 
-plt.tight_layout(rect=[0, 0, 1, 0.96])  # Adjust layout for better spacing
-plt.show()  # Display the figures with subplots
+    fig3, ax3 = plt.subplots(figsize=(10, 6))
+
+    weather_visualizer = WeatherDataVisualizer(file_path)
+    weather_visualizer.createTemperaturePlot(ax1)
+    weather_visualizer.createBarometricPressurePlot(ax2)
+    weather_visualizer.createWindPlot('Compass True Direction', 'Wind Speed')
+    weather_visualizer.createFogProbabilityPlot(ax3)
+
+    plt.show()  # Display the figures with subplots
+
+if __name__ == "__main__":
+    main()
